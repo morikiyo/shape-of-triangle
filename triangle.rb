@@ -13,13 +13,13 @@ class Triangle
     int_params = []
     for param in str_params do
       param = Integer(param.strip) rescue nil
-      if param.nil? || param <= 0
+      if param.nil? || param < 0
         return "辺の長さは正の整数で指定してください"
       end
       int_params.push(param)
     end
 
-    if int_params.length != 3
+    if int_params.length != 3 || int_params.include?(0)
       return "三角形じゃないです＞＜"
     end
 

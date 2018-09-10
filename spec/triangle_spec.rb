@@ -15,7 +15,6 @@ describe Triangle do
 
         message = "辺の長さは正の整数で指定してください"
         expect(Triangle.determineShape('5, 3, x')).to eq message
-        expect(Triangle.determineShape('5, 3, 0')).to eq message
         expect(Triangle.determineShape('5, 3, -1')).to eq message
       end
     end
@@ -25,6 +24,9 @@ describe Triangle do
         message = "三角形じゃないです＞＜"
         expect(Triangle.determineShape('1, 2')).to eq message
         expect(Triangle.determineShape('1, 2, 4, 1')).to eq message
+        expect(Triangle.determineShape('5, 3, 0')).to eq message
+        expect(Triangle.determineShape('5, 0, 3')).to eq message
+        expect(Triangle.determineShape('0, 5, 3')).to eq message
       end
 
       it "message Equilateral Triangle" do
