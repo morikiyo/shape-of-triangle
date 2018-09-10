@@ -24,9 +24,14 @@ describe Triangle do
         message = "三角形じゃないです＞＜"
         expect(Triangle.determineShape('1, 2')).to eq message
         expect(Triangle.determineShape('1, 2, 4, 1')).to eq message
-        expect(Triangle.determineShape('5, 3, 0')).to eq message
-        expect(Triangle.determineShape('5, 0, 3')).to eq message
-        expect(Triangle.determineShape('0, 5, 3')).to eq message
+
+        expect(Triangle.determineShape('2, 3, 5')).to eq message
+        expect(Triangle.determineShape('5, 2, 3')).to eq message
+        expect(Triangle.determineShape('3, 5, 2')).to eq message
+
+        expect(Triangle.determineShape('1, 2, 4')).to eq message
+        expect(Triangle.determineShape('4, 1, 2')).to eq message
+        expect(Triangle.determineShape('2, 4, 1')).to eq message
       end
 
       it "message Equilateral Triangle" do
@@ -43,11 +48,13 @@ describe Triangle do
 
       it "message Scalene Triangle" do
         message = "不等辺三角形ですね！"
-        expect(Triangle.determineShape('3, 5, 2')).to eq message
+        expect(Triangle.determineShape('2, 4, 5')).to eq message
+        expect(Triangle.determineShape('5, 2, 4')).to eq message
+        expect(Triangle.determineShape('4, 5, 2')).to eq message
       end
     end
 
-    context "parameter with spaces" do
+    context "parameter contains any spaces" do
       it "message Equilateral Triangle" do
         message = "正三角形ですね！"
         expect(Triangle.determineShape('173,173,173')).to eq message
@@ -74,7 +81,7 @@ describe Triangle do
       }.to output("正三角形ですね！\n").to_stdout
 
       expect {
-        puts `ruby #{command} 1, 2, 3, 4`
+        puts `ruby #{command} 1, 2, 3`
       }.to output("三角形じゃないです＞＜\n").to_stdout
     end
   end

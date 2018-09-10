@@ -25,6 +25,10 @@ class Triangle
 
     x, y, z = int_params
 
+    if x + y <= z || y + z <= x || z + x <= y
+      return "三角形じゃないです＞＜"
+    end
+
     if x == y && y == z && z == x
       return "正三角形ですね！"
     end
