@@ -1,25 +1,35 @@
 class Triangle
-  # args: 辺の長さの配列
-  def self.determineShape(args)
-    # argument validation
-    lens = []
-    args.each {|arg|
-      len = Integer(arg) rescue nil
-      if len.nil? || len <= 0
+  # param: 辺の長さをカンマ区切りの文字列で指定
+  def self.determineShape(param)
+    if param.nil? || param.empty?
+      return "辺の長さを指定してください"
+    end
+
+    str_params = param.split(/\s*,\s*/)
+    if str_params.empty?
+      return "辺の長さを指定してください"
+    end
+
+    int_params = []
+    for param in str_params do
+      param = Integer(param.strip) rescue nil
+      if param.nil? || param <= 0
         return "辺の長さは正の整数で指定してください"
       end
-      lens.push(len)
-    }
+      int_params.push(param)
+    end
 
-    if lens.length != 3
+    if int_params.length != 3
       return "三角形じゃないです＞＜"
     end
 
-    if lens[0] == lens[1] && lens[1] == lens[2] && lens[2] == lens[0]
+    x, y, z = int_params
+
+    if x == y && y == z && z == x
       return "正三角形ですね！"
     end
 
-    if lens[0] == lens[1] || lens[1] == lens[2] || lens[2] == lens[0]
+    if x == y || y == z || z == x
       return "二等辺三角形ですね！"
     end
 
@@ -29,15 +39,5 @@ end
 
 ### Command Line
 if $0 == __FILE__
-  # コマンドライン引数から末尾のカンマを除去する
-  args = []
-  ARGV.each {|arg|
-    if arg =~ /,$/
-      args.push(arg.chop)
-    else
-      args.push(arg)
-    end
-  }
-
-  puts Triangle.determineShape(args)
+  puts Triangle.determineShape(ARGV.join)
 end
