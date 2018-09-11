@@ -68,21 +68,10 @@ describe Triangle do
     let(:command) { File.join(File.dirname(__FILE__), "..", TARGET_FILE) }
 
     it "print to stdout as in the problem example" do
-      expect {
-        puts `ruby #{command} 2, 3, 4`
-      }.to output("不等辺三角形ですね！\n").to_stdout
-
-      expect {
-        puts `ruby #{command} 2, 2, 1`
-      }.to output("二等辺三角形ですね！\n").to_stdout
-
-      expect {
-        puts `ruby #{command} 1, 1, 1`
-      }.to output("正三角形ですね！\n").to_stdout
-
-      expect {
-        puts `ruby #{command} 1, 2, 3`
-      }.to output("三角形じゃないです＞＜\n").to_stdout
+      expect(`ruby #{command} 2, 3, 4`).to eq "不等辺三角形ですね！\n"
+      expect(`ruby #{command} 2, 2, 1`).to eq "二等辺三角形ですね！\n"
+      expect(`ruby #{command} 1, 1, 1`).to eq "正三角形ですね！\n"
+      expect(`ruby #{command} 1, 2, 3`).to eq "三角形じゃないです＞＜\n"
     end
   end
 end
